@@ -12,9 +12,14 @@
 
 ## 创建项目
 ```
-# 安装Vue Cli
+# 安装脚手架
 npm install -g @vue/cli
+# 初始化项目
+vue create vue-typescripe-admin
 ```
+过程如图示：
+![init](./public/img/Snipaste_2019-12-19_16-45-11.png)
+![init](./public/img/Snipaste_2019-12-19_16-47-49.png)
 
 ## 目录结构
 
@@ -42,4 +47,38 @@ npm install -g @vue/cli
 ├── package.json               	# package.json
 ├── tsconfig.json              	# typescript config
 └── vue.config.js              	# vue-cli config
+```
+
+## 插件安装
+```
+# 安装elment ui
+yarn add axios@0.19.0
+yarn add js-cookie@2.2.1
+yarn add vue-svgicon@3.2.6
+yarn add element-ui@2.12.0
+yarn add path-to-regexp@3.0.0
+yarn add vuex-module-decorators@0.10.1
+
+yarn add sass@1.22.10 --dev
+yarn add sass-loader@7.3.1 --dev
+yarn add @types/js-cookie@2.2.2 --dev
+yarn add style-resources-loader@1.2.1 --dev
+yarn add vue-cli-plugin-style-resources-loader@0.1.3 --dev
+
+```
+
+## 启动项目
+### 开发启动
+```
+yarn serve
+```
+
+### 生产打包
+```
+yarn build
+```
+
+### 单元测试
+```
+yarn test:unit
 ```
