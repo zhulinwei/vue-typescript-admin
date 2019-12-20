@@ -10,7 +10,9 @@
     >
       <div class="title-container">
         <h3 class="title"> {{ $t('login.title') }} </h3>
+        adsfj
         <lang-select class="set-language" />
+         assdf
       </div>
 
       <el-form-item prop="username">
@@ -39,10 +41,7 @@
           autocomplete="on"
           @keyup.enter.native="handleLogin"
         />
-        <span
-          class="show-pwd"
-          @click="showPwd"
-        >
+        <span class="show-pwd" @click="showPwd">
           <svg-icon :name="passwordType === 'password' ? 'eye-off' : 'eye-on'" />
         </span>
       </el-form-item>
@@ -66,20 +65,13 @@
           <span>{{ $t('login.password') }} : {{ $t('login.any') }} </span>
         </div>
 
-        <el-button
-          class="thirdparty-button"
-          type="primary"
-          @click="showDialog=true"
-        >
+        <el-button class="thirdparty-button" type="primary" @click="showDialog=true" >
           {{ $t('login.thirdparty') }}
         </el-button>
       </div>
     </el-form>
 
-    <el-dialog
-      :title="$t('login.thirdparty')"
-      :visible.sync="showDialog"
-    >
+    <el-dialog :title="$t('login.thirdparty')" :visible.sync="showDialog" >
       {{ $t('login.thirdpartyTips') }}
       <br>
       <br>
