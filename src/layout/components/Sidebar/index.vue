@@ -1,5 +1,6 @@
 <template>
   <el-scrollbar wrap-class="scrollbar-wrapper">
+    hgjgkkkgkg
     <el-menu
       :collapse="isCollapse"
       :background-color="variables.menuBg"
