@@ -1,10 +1,14 @@
 <template>
   <div :class="classObj" class="app-wrapper">
+    <div style="color: green; background: red;">asdfsadfasdfsadfsa;aslfjasjdfasfsa;fashdfasfjfasdfhashfabb hab</div>
     <div v-if="classObj.mobile && sidebar.opened" class="drawer-bg" @click="handleClickOutside" />
     <sidebar class="sidebar-container" />
     <div class="main-container">
+      asdf
       <navbar />
+      asdfsadf
       <app-main />
+      asdfasdfasdfasdf
     </div>
   </div>
 </template>

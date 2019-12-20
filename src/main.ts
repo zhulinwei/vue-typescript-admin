@@ -3,6 +3,7 @@ import App from './App.vue'
 import store from './store'
 import router from './router'
 
+import 'normalize.css'
 import '@/styles/index.scss'
 import '@/icons/components'
 import '@/styles/element-variables.scss'
@@ -22,7 +23,8 @@ Vue.use(SvgIcon, {
 Vue.config.productionTip = false
 
 new Vue({
-  router,
+  i18n,
   store,
+  router,
   render: h => h(App)
 }).$mount('#app')

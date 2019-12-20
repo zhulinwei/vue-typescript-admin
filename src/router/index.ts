@@ -15,7 +15,7 @@ const routes = [
     children: [
       {
         path: 'dashboard',
-        comments: () => import('@/views/dashboard/index.vue'),
+        component: () => import('@/views/dashboard/index.vue'),
         meta: {
           title: 'Dashboard',
           icon: 'dashboard'
@@ -24,14 +24,23 @@ const routes = [
     ]
   },
   {
-    path: '/loging',
-    component: () => import('@/views/login/index.vue'),
-    meta: { hidden: true }
+    path: '/login',
+    component: Layout,
+    children: [
+      {
+        path: 'index',
+        component: () => import('@/views/login/index.vue'),
+        // component: () => import('@/views/Home.vue'),
+        meta: {
+          title: 'asdfasdf',
+          icon: 'dashboard'
+        }
+      }
+    ]
   },
   {
-    path: '/about',
-    name: 'about',
-    component: () => import('../views/About.vue')
+    path: '/loging',
+    component: () => import('@/views/login/index.vue'),
   },
   {
     path: '/404',
@@ -41,14 +50,14 @@ const routes = [
 
 const router = new VueRouter({
   mode: 'history',
-  base: process.env.BASE_URL,
-  scrollBehavior: (to, from, savedPosition) => {
-    if (savedPosition) {
-      return savedPosition
-    } else {
-      return { x: 0, y: 0 }
-    }
-  },
+  // base: process.env.BASE_URL,
+  // scrollBehavior: (to, from, savedPosition) => {
+  //   if (savedPosition) {
+  //     return savedPosition
+  //   } else {
+  //     return { x: 0, y: 0 }
+  //   }
+  // },
   routes
 })
 

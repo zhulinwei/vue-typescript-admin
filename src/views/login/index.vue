@@ -84,8 +84,8 @@
       <br>
       <br>
       <br>
-      <!-- <social-sign /> -->
     </el-dialog>
+      <!-- <social-sign /> -->
   </div>
 </template>
 

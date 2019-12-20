@@ -1,5 +1,7 @@
 # vue-typescript-admin
 
+本文在复用[vue-typescript-admin-template](https://github.com/armour/vue-typescript-admin-template)代码与样式的情况下，根据业务需求进行二次开发
+
 ## 前序准备
 开始本项目之前，需要对以下模块有所了解
 - TypeScript：JavaScript超集
@@ -57,6 +59,7 @@ yarn add vue-i18n@8.15.1
 yarn add js-cookie@2.2.1
 yarn add vue-svgicon@3.2.6
 yarn add element-ui@2.12.0
+yarn add normalize.css@8.0.1
 yarn add path-to-regexp@3.0.0
 yarn add vuex-module-decorators@0.10.1
 
@@ -73,6 +76,11 @@ yarn add vue-cli-plugin-style-resources-loader@0.1.3 --dev
 - src/styles/element-variables.scss：Element-ui样式
 - src/styles/_transition.scss：动画样式
 - src/styles/_svgicon：svg图标样式
+
+## 过程记录
+
+### 国际化/多语言
+
 
 ## 启动项目
 ### 开发启动
