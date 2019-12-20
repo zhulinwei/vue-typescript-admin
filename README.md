@@ -67,6 +67,12 @@ yarn add vue-cli-plugin-style-resources-loader@0.1.3 --dev
 
 ```
 
+## 基本样式
+- src/styles/index.scss：全局基本样式
+- src/styles/element-variables.scss：Element-ui样式
+- src/styles/_transition.scss：动画样式
+- src/styles/_svgicon：svg图标样式
+
 ## 启动项目
 ### 开发启动
 ```
