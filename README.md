@@ -1,6 +1,6 @@
 # vue-typescript-admin
 
-本文在复用[vue-typescript-admin-template](https://github.com/armour/vue-typescript-admin-template)代码与样式的情况下，根据业务需求进行二次开发
+本文在复用[vue-typescript-admin-template](https://github.com/armour/vue-typescript-admin-template)代码与样式的情况下，根据实际业务需求进行二次开发
 
 ## 前序准备
 开始本项目之前，需要对以下模块有所了解
@@ -73,14 +73,43 @@ yarn add vue-cli-plugin-style-resources-loader@0.1.3 --dev
 ```
 
 ## 基本样式
-- src/styles/index.scss：全局基本样式
-- src/styles/element-variables.scss：Element-ui样式
-- src/styles/_transition.scss：动画样式
-- src/styles/_svgicon：svg图标样式
+复用原项目中`src/styles`样式，具体文件如下：
+- index.scss：全局基本样式
+- element-variables.scss：Element-ui样式
+- _transition.scss：动画样式
+- _svgicon：svg图标样式
 
 ## 过程记录
 
 ### 国际化/多语言
+
+- 复用原项目src/lang文件夹
+- 声明lang文件，获得的代码补全、接口提示等功能
+```
+// src/shims.d.ts
+declare module 'element-ui/lib/locale/lang/*' {
+  export const elementLocale: any
+}
+```
+- 引入使用
+```
+// src/main.ts
+import i18n from '@/lang'
+import ElementUI from 'element-ui'
+Vue.use(ElementUI, {
+  i18n: (key: string, value: string) => i18n.t(key, value)
+})
+new Vue({
+  ...
+  i18n,
+  ...
+}).$mount('#app')
+```
+
+
+```
+
+```
 
 
 ## 启动项目
