@@ -3,6 +3,7 @@ import VueRouter from 'vue-router'
 import Home from '@/views/Home.vue'
 
 import Layout from '@/layout/index.vue'
+import path from 'path';
 
 Vue.use(VueRouter)
 
@@ -21,6 +22,11 @@ const routes = [
         }
       }
     ]
+  },
+  {
+    path: '/loging',
+    component: () => import('@/views/login/index.vue'),
+    meta: { hidden: true }
   },
   {
     path: '/about',

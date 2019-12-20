@@ -53,6 +53,7 @@ vue create vue-typescripe-admin
 ```
 # 安装elment ui
 yarn add axios@0.19.0
+yarn add vue-i18n@8.15.1
 yarn add js-cookie@2.2.1
 yarn add vue-svgicon@3.2.6
 yarn add element-ui@2.12.0

@@ -6,9 +6,12 @@ import router from './router'
 import '@/styles/index.scss'
 import '@/icons/components'
 import '@/styles/element-variables.scss'
+import i18n from '@/lang'
 
 import ElementUI from 'element-ui'
-Vue.use(ElementUI)
+Vue.use(ElementUI, {
+  i18n: (key: string, value: string) => i18n.t(key, value)
+})
 import SvgIcon from 'vue-svgicon'
 Vue.use(SvgIcon, {
   tagName: 'svg-icon',
