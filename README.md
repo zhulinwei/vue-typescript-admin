@@ -20,6 +20,7 @@ npm install -g @vue/cli
 vue create vue-typescripe-admin
 ```
 过程如图示：
+
 ![init](./public/img/Snipaste_2019-12-19_16-45-11.png)
 ![init](./public/img/Snipaste_2019-12-19_16-47-49.png)
 
