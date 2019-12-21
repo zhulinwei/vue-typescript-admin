@@ -3,40 +3,21 @@
     v-if="!item.meta || !item.meta.hidden"
     :class="['menu-wrapper', isCollapse ? 'simple-mode' : 'full-mode', {'first-level': isFirstLevel}]"
   >
+  <div style="font-size: 12px;">
+    {{ item }}
+  </div>
     <template v-if="theOnlyOneChild && !theOnlyOneChild.children">
-      <sidebar-item-link
-        v-if="theOnlyOneChild.meta"
-        :to="resolvePath(theOnlyOneChild.path)"
-      >
-        <el-menu-item
-          :index="resolvePath(theOnlyOneChild.path)"
-          :class="{'submenu-title-noDropdown': isFirstLevel}"
-        >
-          <svg-icon
-            v-if="theOnlyOneChild.meta.icon"
-            :name="theOnlyOneChild.meta.icon"
-          />
-          <span
-            v-if="theOnlyOneChild.meta.title"
-            slot="title"
-          >{{ theOnlyOneChild.meta.title }}</span>
+      <sidebar-item-link v-if="theOnlyOneChild.meta" :to="resolvePath(theOnlyOneChild.path)" >
+        <el-menu-item :index="resolvePath(theOnlyOneChild.path)" :class="{'submenu-title-noDropdown': isFirstLevel}" >
+          <svg-icon v-if="theOnlyOneChild.meta.icon" :name="theOnlyOneChild.meta.icon" />
+          <span v-if="theOnlyOneChild.meta.title" slot="title" >{{ theOnlyOneChild.meta.title }}</span>
         </el-menu-item>
       </sidebar-item-link>
     </template>
-    <el-submenu
-      v-else
-      :index="resolvePath(item.path)"
-      popper-append-to-body
-    >
+    <el-submenu v-else :index="resolvePath(item.path)" popper-append-to-body >
       <template slot="title">
-        <svg-icon
-          v-if="item.meta && item.meta.icon"
-          :name="item.meta.icon"
-        />
-        <span
-          v-if="item.meta && item.meta.title"
-          slot="title"
-        >{{ item.meta.title }}</span>
+        <svg-icon v-if="item.meta && item.meta.icon" :name="item.meta.icon" />
+        <span v-if="item.meta && item.meta.title" slot="title" >{{ item.meta.title }}</span>
       </template>
       <template v-if="item.children">
         <sidebar-item
@@ -61,8 +42,6 @@ import { isExternal } from '@/utils/validate'
 import SidebarItemLink from './SidebarItemLink.vue'
 
 @Component({
-  // Set 'name' here to prevent uglifyjs from causing recursive component not work
-  // See https://medium.com/haiiro-io/element-component-name-with-vue-class-component-f3b435656561 for detail
   name: 'SidebarItem',
   components: {
     SidebarItemLink
@@ -75,17 +54,15 @@ export default class extends Vue {
   @Prop({ default: '' }) private basePath!: string
 
   get showingChildNumber() {
-    if (this.item.children) {
-      const showingChildren = this.item.children.filter((item) => {
-        if (item.meta && item.meta.hidden) {
-          return false
-        } else {
-          return true
-        }
-      })
-      return showingChildren.length
-    }
-    return 0
+    if (!this.item.children) return 0
+    const showingChildren = this.item.children.filter((item) => {
+      if (item.meta.hidden) {
+        return false
+      } else {
+        return true
+      }
+    })
+    return showingChildren.length
   }
 
   get theOnlyOneChild() {
@@ -99,8 +76,6 @@ export default class extends Vue {
         }
       }
     }
-    // If there is no children, return itself with path removed,
-    // because this.basePath already conatins item's path information
     return { ...this.item, path: '' }
   }
 

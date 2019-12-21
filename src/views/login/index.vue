@@ -10,9 +10,7 @@
     >
       <div class="title-container">
         <h3 class="title"> {{ $t('login.title') }} </h3>
-        adsfj
         <lang-select class="set-language" />
-         assdf
       </div>
 
       <el-form-item prop="username">
@@ -54,21 +52,6 @@
       >
         {{ $t('login.logIn') }}
       </el-button>
-
-      <div style="position:relative">
-        <div class="tips">
-          <span>{{ $t('login.username') }} : admin </span>
-          <span>{{ $t('login.password') }} : {{ $t('login.any') }} </span>
-        </div>
-        <div class="tips">
-          <span>{{ $t('login.username') }} : editor </span>
-          <span>{{ $t('login.password') }} : {{ $t('login.any') }} </span>
-        </div>
-
-        <el-button class="thirdparty-button" type="primary" @click="showDialog=true" >
-          {{ $t('login.thirdparty') }}
-        </el-button>
-      </div>
     </el-form>
 
     <el-dialog :title="$t('login.thirdparty')" :visible.sync="showDialog" >
@@ -77,7 +60,6 @@
       <br>
       <br>
     </el-dialog>
-      <!-- <social-sign /> -->
   </div>
 </template>
 
@@ -89,13 +71,11 @@ import { Form as ElForm, Input } from 'element-ui'
 import { UserModule } from '@/store/modules/user'
 import { isValidUsername } from '@/utils/validate'
 import LangSelect from '@/components/LangSelect/index.vue'
-// import SocialSign from './components/SocialSignin.vue'
 
 @Component({
   name: 'Login',
   components: {
     LangSelect,
-    // SocialSign
   }
 })
 export default class extends Vue {
@@ -129,8 +109,6 @@ export default class extends Vue {
 
   @Watch('$route', { immediate: true })
   private onRouteChange(route: Route) {
-    // TODO: remove the "as Dictionary<string>" hack after v4 release for vue-router
-    // See https://github.com/vuejs/vue-router/pull/2050 for details
     const query = route.query as Dictionary<string>
     if (query) {
       this.redirect = query.redirect
@@ -166,7 +144,6 @@ export default class extends Vue {
           path: this.redirect || '/',
           query: this.otherQuery
         })
-        // Just to simulate the time of the request
         setTimeout(() => {
           this.loading = false
         }, 0.5 * 1000)
@@ -188,7 +165,6 @@ export default class extends Vue {
 </script>
 
 <style lang="scss">
-// References: https://www.zhangxinxu.com/wordpress/2018/01/css-caret-color-first-line/
 @supports (-webkit-mask: none) and (not (cater-color: $loginCursorColor)) {
   .login-container .el-input {
     input { color: $loginCursorColor; }

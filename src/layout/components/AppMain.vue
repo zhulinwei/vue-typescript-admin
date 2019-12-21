@@ -1,6 +1,5 @@
 <template>
   <section class="app-main">
-    这里是appmain
     <transition
       name="fade-transform"
       mode="out-in"
