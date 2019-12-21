@@ -3,21 +3,19 @@
     v-if="!item.meta || !item.meta.hidden"
     :class="['menu-wrapper', isCollapse ? 'simple-mode' : 'full-mode', {'first-level': isFirstLevel}]"
   >
-  <div style="font-size: 12px;">
-    {{ item }}
-  </div>
     <template v-if="theOnlyOneChild && !theOnlyOneChild.children">
-      <sidebar-item-link v-if="theOnlyOneChild.meta" :to="resolvePath(theOnlyOneChild.path)" >
+      <sidebar-item-link v-if="theOnlyOneChild" :to="resolvePath(theOnlyOneChild.path)" >
         <el-menu-item :index="resolvePath(theOnlyOneChild.path)" :class="{'submenu-title-noDropdown': isFirstLevel}" >
-          <svg-icon v-if="theOnlyOneChild.meta.icon" :name="theOnlyOneChild.meta.icon" />
-          <span v-if="theOnlyOneChild.meta.title" slot="title" >{{ theOnlyOneChild.meta.title }}</span>
+          <svg-icon v-if="theOnlyOneChild.icon" :name="theOnlyOneChild.icon" />
+          <span v-if="theOnlyOneChild.name" slot="title" >{{ $t('route.' + theOnlyOneChild.name) }}</span>
         </el-menu-item>
       </sidebar-item-link>
     </template>
+
     <el-submenu v-else :index="resolvePath(item.path)" popper-append-to-body >
       <template slot="title">
-        <svg-icon v-if="item.meta && item.meta.icon" :name="item.meta.icon" />
-        <span v-if="item.meta && item.meta.title" slot="title" >{{ item.meta.title }}</span>
+        <svg-icon v-if="item.icon" :name="item.icon" />
+        <span v-if="item.name" slot="title" > {{ $t('route.' + item.name) }}</span>
       </template>
       <template v-if="item.children">
         <sidebar-item
@@ -40,6 +38,7 @@ import { Component, Prop, Vue } from 'vue-property-decorator'
 import { Route, RouteConfig } from 'vue-router'
 import { isExternal } from '@/utils/validate'
 import SidebarItemLink from './SidebarItemLink.vue'
+import { IMemuConfig } from '@/api/types'
 
 @Component({
   name: 'SidebarItem',
@@ -48,30 +47,29 @@ import SidebarItemLink from './SidebarItemLink.vue'
   }
 })
 export default class extends Vue {
-  @Prop({ required: true }) private item!: RouteConfig
+  @Prop({ required: true }) private item!: IMemuConfig
   @Prop({ default: false }) private isCollapse!: boolean
   @Prop({ default: true }) private isFirstLevel!: boolean
   @Prop({ default: '' }) private basePath!: string
 
   get showingChildNumber() {
+    console.log(this.item)
     if (!this.item.children) return 0
     const showingChildren = this.item.children.filter((item) => {
-      if (item.meta.hidden) {
-        return false
-      } else {
-        return true
-      }
+      return item.hidden != true
     })
+    console.log(showingChildren.length)
     return showingChildren.length
   }
 
   get theOnlyOneChild() {
-    if (this.showingChildNumber > 1) {
+    console.log(this.showingChildNumber)
+    if (this.showingChildNumber > 0) {
       return null
     }
     if (this.item.children) {
       for (let child of this.item.children) {
-        if (!child.meta || !child.meta.hidden) {
+        if (!child || !child.hidden) {
           return child
         }
       }

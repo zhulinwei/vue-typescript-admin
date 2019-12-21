@@ -9,10 +9,6 @@
       :collapse-transition="false"
       mode="vertical"
     >
-    <div style="font-size: 12px;">
-      {{ routes }}
-    </div>
-    asdfadsf
       <sidebar-item
         v-for="route in routes"
         :key="route.path"
@@ -31,40 +27,9 @@ import SidebarItem from './SidebarItem.vue'
 import variables from '@/styles/_variables.scss'
 import { PermissionModule } from '@/store/modules/permission'
 
-const mockMenus = [
-  {
-    "name": "dashboard",
-    "path": "/dashboard",
-    "icon": "dashboard"
-  },
-  // {
-  //   "name": "博客管理",
-  //   "icon": "fa-book",
-  //   "subMenus": [
-  //     {
-  //       "name": "目录列表",
-  //       "url": "/admin/blog/catalogs",
-  //       "icon": "fa-folder-open"
-  //     },
-  //     {
-  //       "name": "文章列表",
-  //       "url": "/admin/blog/articles",
-  //       "icon": "fa-file",
-  //     },
-  //     {
-  //       "name": "发布文章",
-  //       "url": "/admin/blog/editors",
-  //       "icon": "fa-pencil-square-o",
-  //     },
-  //     {
-  //       "name": "评论管理",
-  //       "url": "/admin/blog/comments",
-  //       "icon": "fa-comments"
-  //     },
-  //   ]
-  // },
-]
-console.log(mockMenus)
+
+import * as mock from '@/mock'
+import { IMemuConfig } from '@/api/types'
 
 @Component({
   name: 'SideBar',
@@ -79,10 +44,7 @@ export default class extends Vue {
 
   get routes() {
     // TODO 根据用户角色动态获取侧边栏
-    // return PermissionModule.routes
-    console.log("come in")
-    console.log(mockMenus)
-    return mockMenus
+    return mock.menus
   }
 
   get variables() {
