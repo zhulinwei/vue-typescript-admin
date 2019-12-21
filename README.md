@@ -155,7 +155,62 @@ export default new VueRouter({
 })
 ```
 - 侧边栏展示：如何给不同的用户展示侧边栏有很多种方案，如后端根据用户角色生成路由后返回或者后端直接返回路由后再由前端根据用户角色进行过滤匹配。不应该复用路由资源的配置
+```
+// src/mock.ts
+export const menus = [{
+  name: "dashboard",
+  path: "/dashboard",
+  icon: "dashboard"
+}]
 
+// src/layoyt/components/Sidebar/index.vue
+...
+import * as mock from '@/mock'
+...
+export default class extends Vue {
+  ...
+  get routes() {
+    return mock.menus
+  }
+  ...
+}
+...
+
+// src/layoyt/components/Sidebar/SidebarItem.vue
+<template>
+  <div
+    v-if="!item.meta || !item.meta.hidden"
+    :class="['menu-wrapper', isCollapse ? 'simple-mode' : 'full-mode', {'first-level': isFirstLevel}]"
+  >
+    <template v-if="theOnlyOneChild && !theOnlyOneChild.children">
+      <sidebar-item-link v-if="theOnlyOneChild" :to="resolvePath(theOnlyOneChild.path)" >
+        <el-menu-item :index="resolvePath(theOnlyOneChild.path)" :class="{'submenu-title-noDropdown': isFirstLevel}" >
+          <svg-icon v-if="theOnlyOneChild.icon" :name="theOnlyOneChild.icon" />
+          <span v-if="theOnlyOneChild.name" slot="title" >{{ $t('route.' + theOnlyOneChild.name) }}</span>
+        </el-menu-item>
+      </sidebar-item-link>
+    </template>
+
+    <el-submenu v-else :index="resolvePath(item.path)" popper-append-to-body >
+      <template slot="title">
+        <svg-icon v-if="item.icon" :name="item.icon" />
+        <span v-if="item.name" slot="title" > {{ $t('route.' + item.name) }}</span>
+      </template>
+      <template v-if="item.children">
+        <sidebar-item
+          v-for="child in item.children"
+          :key="child.path"
+          :item="child"
+          :is-collapse="isCollapse"
+          :is-first-level="false"
+          :base-path="resolvePath(child.path)"
+          class="nest-menu"
+        />
+      </template>
+    </el-submenu>
+  </div>
+</template>
+```
 
 
 ## 启动项目
