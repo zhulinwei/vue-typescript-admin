@@ -53,17 +53,14 @@ export default class extends Vue {
   @Prop({ default: '' }) private basePath!: string
 
   get showingChildNumber() {
-    console.log(this.item)
     if (!this.item.children) return 0
     const showingChildren = this.item.children.filter((item) => {
       return item.hidden != true
     })
-    console.log(showingChildren.length)
     return showingChildren.length
   }
 
   get theOnlyOneChild() {
-    console.log(this.showingChildNumber)
     if (this.showingChildNumber > 0) {
       return null
     }

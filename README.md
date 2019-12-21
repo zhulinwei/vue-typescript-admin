@@ -106,6 +106,58 @@ new Vue({
 }).$mount('#app')
 ```
 
+### 路由与侧边栏
+发现原项目中作者在路由和侧边栏中复用同一份代码，混淆了路由资源和用户权限的概念，笔者将两个概念单独整理，分别处理
+
+- 路由资源：router文件只定义前端拥有的资源，即用户选择某路径时前端应该渲染哪个页面。不要在路由中定义与用户权限相关的信息
+```
+// src/router/index.ts
+import Vue from 'vue'
+import VueRouter from 'vue-router'
+
+import Layout from '@/layout/index.vue'
+
+Vue.use(VueRouter)
+
+const routes = [
+  {
+    path: '/login',
+    component: () => import('@/views/login/index.vue'),
+  },
+  {
+    path: '/404',
+    component: () => import('@/views/404.vue')
+  },
+  {
+    path: '/',
+    component: Layout,
+    redirect: '/dashboard',
+    children: [
+      {
+        path: 'dashboard',
+        component: () => import('@/views/dashboard/index.vue'),
+      }
+    ]
+  },
+]
+
+export default new VueRouter({
+  mode: 'history',
+  base: process.env.BASE_URL,
+  scrollBehavior: (to, from, savedPosition) => {
+    if (savedPosition) {
+      return savedPosition
+    } else {
+      return { x: 0, y: 0 }
+    }
+  },
+  routes
+})
+```
+- 侧边栏展示：如何给不同的用户展示侧边栏有很多种方案，如后端根据用户角色生成路由后返回或者后端直接返回路由后再由前端根据用户角色进行过滤匹配。不应该复用路由资源的配置
+
+
+
 ## 启动项目
 ### 开发启动
 ```

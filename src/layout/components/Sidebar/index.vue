@@ -26,10 +26,7 @@ import { AppModule } from '@/store/modules/app'
 import SidebarItem from './SidebarItem.vue'
 import variables from '@/styles/_variables.scss'
 import { PermissionModule } from '@/store/modules/permission'
-
-
 import * as mock from '@/mock'
-import { IMemuConfig } from '@/api/types'
 
 @Component({
   name: 'SideBar',

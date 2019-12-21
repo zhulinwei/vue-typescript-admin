@@ -25,11 +25,6 @@ const routes = [
       {
         path: 'dashboard',
         component: () => import('@/views/dashboard/index.vue'),
-        meta: {
-          icon: 'dashboard',
-          title: 'Dashboard',
-          requiresAuth: true,
-        }
       }
     ]
   },
