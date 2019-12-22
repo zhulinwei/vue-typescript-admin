@@ -15,7 +15,7 @@ const routes = [
   },
   {
     path: '/404',
-    component: () => import('@/views/404.vue')
+    component: () => import('@/views/error_page/404.vue')
   },
   {
     path: '/',
@@ -27,6 +27,30 @@ const routes = [
         component: () => import('@/views/dashboard/index.vue'),
       }
     ]
+  },
+  {
+    path: '/profile',
+    component: Layout,
+    children: [
+      {
+        path: '',
+        component: () => import('@/views/profile/index.vue'),
+      }
+    ]
+  },
+  {
+    path: '/error_page',
+    component: Layout,
+    children: [
+      {
+        path: '404',
+        component: () => import('@/views/error_page/404.vue'),
+      }
+    ]
+  },
+  {
+    path: '*',
+    component: () => import('@/views/error_page/404.vue')
   },
 ]
 

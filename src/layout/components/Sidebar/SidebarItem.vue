@@ -1,6 +1,6 @@
 <template>
   <div
-    v-if="!item.meta || !item.meta.hidden"
+    v-if="!item || !item.hidden"
     :class="['menu-wrapper', isCollapse ? 'simple-mode' : 'full-mode', {'first-level': isFirstLevel}]"
   >
     <template v-if="theOnlyOneChild && !theOnlyOneChild.children">
@@ -81,7 +81,8 @@ export default class extends Vue {
     if (isExternal(this.basePath)) {
       return this.basePath
     }
-    return path.resolve(this.basePath, routePath)
+    console.log({ basePath: this.basePath, path: routePath, last: path.join(this.basePath, routePath) })
+    return path.join(this.basePath, routePath)
   }
 }
 </script>

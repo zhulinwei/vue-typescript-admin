@@ -14,7 +14,7 @@ export const userInfoResponse = {
       username: "admin",
       password: "any",
       name: "Super Admin",
-      avatar: "https://avatars0.githubusercontent.com/u/17670262?s=40&v=4",
+      avatar: "https://avatars0.githubusercontent.com/u/17670262?s=200&v=4",
       introduction: "I am a super administrator",
       email: "admin@test.com",
       phone: "1234567890",
@@ -23,17 +23,25 @@ export const userInfoResponse = {
   }
 }
 
-export const menus = [{
+export const menus = [
+{
   name: "dashboard",
   path: "/dashboard",
   icon: "dashboard"
-},{
-  name: "dashboard2",
-  path: "/dashboard1",
-  icon: "dashboard",
+},
+{
+  name: "profile",
+  path: "/profile",
+  icon: "user"
+},
+{
+  name: "errorPages",
+  path: "/error_page",
+  icon: "404",
   children: [{
-    name: "dashboard",
-    path: "/dashboard2",
-    icon: "dashboard"
+    name: "page404",
+    path: "/404",
+    icon: "404",
   }]
-}]
+}
+]
