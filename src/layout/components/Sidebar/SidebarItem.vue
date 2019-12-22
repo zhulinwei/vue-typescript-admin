@@ -38,7 +38,7 @@ import { Component, Prop, Vue } from 'vue-property-decorator'
 import { Route, RouteConfig } from 'vue-router'
 import { isExternal } from '@/utils/validate'
 import SidebarItemLink from './SidebarItemLink.vue'
-import { IMemuConfig } from '@/api/types'
+import { IMemuConfig } from '@/model'
 
 @Component({
   name: 'SidebarItem',
