@@ -1,33 +1,22 @@
 import router from './router'
 import { Route } from 'vue-router'
-import { Message } from 'element-ui'
 
 import { UserModule } from './store/modules/user'
-import { PermissionModule } from './store/modules/permission'
-// import { PermissionModule } from '@/store/modules/permission'
 
 const whiteList = ['/login']
 
 router.beforeEach(async(to: Route, _: Route, next: any) => {
-
-  // 判断是否需要验证
-  if (!to.meta.requiresAuth) {
-    return next()
+  const userToken = UserModule.token
+  if (!userToken) {
+    whiteList.includes(to.path) ? next() : next(`/login?redirect=${to.path}`)
+    return
   }
 
-  const userRoles = UserModule.roles
-  const userToken = UserModule.token
-  // if (!userToken || userRoles.length < 1) {
-  // if (!userToken || userRoles.length < 1) {
-  //   whiteList.includes(to.path) ? next() : next(`/login?redirect=${to.path}`)
-  //   return
-  // }
-
-
-
-  console.log('穿透了')
+  let userRoles = UserModule.roles
+  if (!userRoles || userRoles.length < 1) {
+    await UserModule.GetUserInfo()
+    userRoles = UserModule.roles
+  }
+  // TODO 检查用户角色是否有访问页面的权限
   next()
-
-
-  
 })

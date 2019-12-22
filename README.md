@@ -1,6 +1,6 @@
 # vue-typescript-admin
 
-本文在复用[vue-typescript-admin-template](https://github.com/armour/vue-typescript-admin-template)代码与样式的情况下，根据实际业务需求进行二次开发
+> 本文在复用[vue-typescript-admin-template](https://github.com/armour/vue-typescript-admin-template)代码与样式的情况下，根据实际业务需求进行二次开发
 
 ## 前序准备
 开始本项目之前，需要对以下模块有所了解
@@ -107,7 +107,7 @@ new Vue({
 ```
 
 ### 路由与侧边栏
-发现原项目中作者在路由和侧边栏中复用同一份代码，混淆了路由资源和用户权限的概念，笔者将两个概念单独整理，分别处理
+> 发现原项目中作者在路由和侧边栏中复用同一份代码，混淆了路由资源和用户权限的概念，笔者将两个概念单独整理，分别处理
 
 - 路由资源：router文件只定义前端拥有的资源，即用户选择某路径时前端应该渲染哪个页面。不要在路由中定义与用户权限相关的信息
 ```
@@ -212,6 +212,38 @@ export default class extends Vue {
 </template>
 ```
 
+### 权限校验
+用户进入页面时，我们应该校验用户的角色是否有权限打开该页面，基本原理是使用vue router的导航守卫，参考代码如下：
+```
+// src/permission.ts
+import router from './router'
+import { Route } from 'vue-router'
+import { UserModule } from './store/modules/user'
+
+const whiteList = ['/login']
+
+router.beforeEach(async(to: Route, _: Route, next: any) => {
+  const userToken = UserModule.token
+  if (!userToken) {
+    whiteList.includes(to.path) ? next() : next(`/login?redirect=${to.path}`)
+    return
+  }
+
+  let userRoles = UserModule.roles
+  if (!userRoles || userRoles.length < 1) {
+    await UserModule.GetUserInfo()
+    userRoles = UserModule.roles
+  }
+  // TODO 检查用户角色是否有访问页面的权限
+  next()
+})
+
+// src/main.ts
+...
+import '@/router'
+import '@/permission'
+...
+```
 
 ## 启动项目
 ### 开发启动
