@@ -56,6 +56,8 @@ vue create vue-typescripe-admin
 ```
 # 安装elment ui
 yarn add axios@0.19.0
+yarn add @antv/g2@3.5.11
+yarn add @antv/data-set@0.10.2
 yarn add vue-i18n@8.15.1
 yarn add js-cookie@2.2.1
 yarn add vue-svgicon@3.2.6
@@ -63,6 +65,9 @@ yarn add element-ui@2.12.0
 yarn add normalize.css@8.0.1
 yarn add path-to-regexp@3.0.0
 yarn add vuex-module-decorators@0.10.1
+
+yarn add echarts@4.5.0
+yarn add @types/echarts@4.4.2
 
 yarn add sass@1.22.10 --dev
 yarn add sass-loader@7.3.1 --dev

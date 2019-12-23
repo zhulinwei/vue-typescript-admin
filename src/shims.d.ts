@@ -6,3 +6,7 @@ declare module '*.vue' {
 declare module 'element-ui/lib/locale/lang/*' {
   export const elementLocale: any
 }
+
+declare module '@antv/data-set' {
+  export const DataSet: any
+}

@@ -81,7 +81,6 @@ export default class extends Vue {
     if (isExternal(this.basePath)) {
       return this.basePath
     }
-    console.log({ basePath: this.basePath, path: routePath, last: path.join(this.basePath, routePath) })
     return path.join(this.basePath, routePath)
   }
 }
